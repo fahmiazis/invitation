@@ -23,11 +23,11 @@ module.exports = {
           }
         })
         if (result.length > 0) {
-          return response(res, 'tamu telah terdaftar', { result })
+          return response(res, `${result[0].name} telah terdaftar`, { result })
         } else {
           const result = await user.create(results)
           if (result) {
-            return response(res, 'tamu berhasil dikonfirmasi', { result })
+            return response(res, `Selamat Datang ${result[0].name}`, { result })
           } else {
             return response(res, 'tamu gagal dikonfirmasi', {}, 404, false)
           }
