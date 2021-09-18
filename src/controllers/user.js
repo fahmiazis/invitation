@@ -39,7 +39,9 @@ module.exports = {
   },
   getUser: async (req, res) => {
     try {
-      const result = await user.findAll()
+      const result = await user.findAll({
+        order: [['id', 'DESC']]
+      })
       if (result) {
         return response(res, 'success get user', { result })
       } else {
