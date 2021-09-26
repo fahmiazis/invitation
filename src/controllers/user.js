@@ -53,9 +53,28 @@ module.exports = {
   },
   deleteUser: async (req, res) => {
     try {
-      await user.destroy({
-        truncate: true
-      })
+      const result = await user.findAll()
+      if (result.length > 0) {
+        const cek = []
+        for (let i = 0; i < result.length; i++) {
+          const findUser = await user.findOne({
+            where: {
+              name: result[i].name
+            }
+          })
+          if (findUser) {
+            await findUser.destroy()
+            cek.push(1)
+          }
+        }
+        if (cek.length === result.length) {
+          return response(res, 'success delete data user')
+        } else {
+          return response(res, 'data user is null')
+        }
+      } else {
+        return response(res, 'data user is null')
+      }
     } catch (error) {
       return response(res, error.message, {}, 500, false)
     }
