@@ -50,5 +50,14 @@ module.exports = {
     } catch (error) {
       return response(res, error.message, {}, 500, false)
     }
+  },
+  deleteUser: async (req, res) => {
+    try {
+      await user.destroy({
+        truncate: true
+      })
+    } catch (error) {
+      return response(res, error.message, {}, 500, false)
+    }
   }
 }
