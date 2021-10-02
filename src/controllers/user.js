@@ -43,7 +43,11 @@ module.exports = {
         order: [['id', 'DESC']]
       })
       if (result) {
-        return response(res, 'success get user', { result })
+        let sum = 0
+        for (let i = 0; i < result.length; i++) {
+          sum += parseInt(result[i].partice)
+        }
+        return response(res, 'success get user', { result, sum })
       } else {
         return response(res, 'failed get user', {}, 404, false)
       }
