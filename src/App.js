@@ -15,6 +15,8 @@ app.use(cors())
 
 const userRoute = require('./routes/user')
 
+app.use('/download', express.static('assets/exports'))
+
 app.use('/user', userRoute)
 
 app.get('*', (req, res) => {
